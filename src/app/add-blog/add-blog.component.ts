@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { BlogsService } from '../blogs.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-add-blog',
   imports: [ReactiveFormsModule],
@@ -15,7 +16,7 @@ import { BlogsService } from '../blogs.service';
 export class AddBlogComponent {
   form!: FormGroup;
 
-  constructor(private blogsService: BlogsService) {
+  constructor(private blogsService: BlogsService, private router: Router) {
     this.form = new FormGroup({
       title: new FormControl('', [Validators.required]),
       author: new FormControl('', [Validators.required]),
@@ -26,6 +27,9 @@ export class AddBlogComponent {
   onSubmit() {
     this.blogsService.addBlog(this.form.value).subscribe({
       next: (data) => {
+        // redirect to list using router
+        this.router.navigate(['/list']);
+
         console.log(data);
       },
       error: (error) => {

@@ -2,14 +2,8 @@ import { NgFor, NgStyle, SlicePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { BlogsService } from '../blogs.service';
-interface Blog {
-  _id: string;
-  title: string;
-  content: string;
-  author: string;
-  upvotes: number;
-  downvotes: number;
-}
+import { Blog } from '../Blog';
+
 @Component({
   selector: 'app-list',
   imports: [NgStyle, SlicePipe, NgFor, RouterOutlet, RouterLink],
@@ -29,8 +23,6 @@ export class ListComponent implements OnInit {
           alert('No blogs added yet!');
           this.isEmptyList = true;
         } else {
-          console.log(data);
-
           this.blogs = data;
         }
       },

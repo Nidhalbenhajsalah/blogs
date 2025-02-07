@@ -1,3 +1,31 @@
-<div class="content">
-  <div class="card">blog goes here</div>
+<div class="container content">
+  <button type="button" class="btn btn-primary" routerLink="/list">Back</button>
+  <!-- blog layout  -->
+  @if (blogData) {
+  <div class="container mt-5">
+    <div class="card shadow">
+      <div class="card-body">
+        <h1 class="card-title">{{ blogData.title }}</h1>
+        <h5 class="text-muted">By {{ blogData.author }}</h5>
+        <p class="card-text mt-3">{{ blogData.content }}</p>
+        <div class="d-flex justify-content-between align-items-center mt-4">
+          <div>
+            <button
+              class="btn btn-success me-2"
+              (click)="updateVote(blogData, 'up')"
+            >
+              👍 <span>{{ blogData.upvotes }}</span>
+            </button>
+            <button
+              class="btn btn-danger"
+              (click)="updateVote(blogData, 'down')"
+            >
+              👎 <span>{{ blogData.downvotes }}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
 </div>
