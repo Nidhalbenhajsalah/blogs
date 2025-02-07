@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
+import { Blog } from './Blog';
 @Injectable({
   providedIn: 'root',
 })
@@ -11,24 +11,28 @@ export class BlogsService {
   constructor(private http: HttpClient) {}
 
   // get blogs
-  getBlogs(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+  getBlogs(): Observable<Blog[]> {
+    return this.http.get<Blog[]>(this.apiUrl);
   }
 
   // add blog
-  addBlog(blog: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, blog);
+  addBlog(blog: Blog): Observable<Blog> {
+    return this.http.post<Blog>(this.apiUrl, blog);
   }
 
-  getBlogById(id: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  getBlogById(id: string): Observable<Blog> {
+    return this.http.get<Blog>(`${this.apiUrl}/${id}`);
   }
 
-  upvoteBlog(id: string): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/upvote/${id}`, {});
+  upvoteBlog(id: string): Observable<Blog> {
+    return this.http.put<Blog>(`${this.apiUrl}/upvote/${id}`, {});
   }
 
-  downvoteBlog(id: string): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/downvote/${id}`, {});
+  downvoteBlog(id: string): Observable<Blog> {
+    return this.http.put<Blog>(`${this.apiUrl}/downvote/${id}`, {});
+  }
+
+  getPartialLoadBlogs(page: number, limit: number) {
+    return this.http.get(`${this.apiUrl}?page=${page}&limit=${limit}`);
   }
 }

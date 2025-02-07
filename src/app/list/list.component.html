@@ -26,13 +26,13 @@
         <small class="text-muted">Author: {{ blog.author }}</small>
       </p>
       <button class="btn btn-success btn-sm" (click)="updateVote(blog, 'up')">
-        Upvote ({{ blog.upvotes }})
+        👍 ({{ blog.upvotes }})
       </button>
       <button
         class="btn btn-danger btn-sm ms-2"
         (click)="updateVote(blog, 'down')"
       >
-        Downvote ({{ blog.downvotes }})
+        👎 ({{ blog.downvotes }})
       </button>
     </div>
   </div>
