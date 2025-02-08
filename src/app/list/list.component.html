@@ -2,20 +2,27 @@
   <nav class="navbar navbar-light bg-light mb-5">
     <div class="container-fluid">
       <a class="navbar-brand">Blogs List</a>
-      <form class="d-flex">
+      <form class="d-flex" (submit)="searchBlogs()">
         <input
           class="form-control me-2"
           type="search"
+          [(ngModel)]="searchTerm"
           placeholder="Search"
           aria-label="Search"
+          [ngModelOptions]="{ standalone: true }"
+          (keyup)="searchBlogs()"
         />
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
     </div>
   </nav>
+  @if (isEmptyList) {
+  <div class="alert alert-warning">No blogs found. Try a different search.</div>
+  }
+
   <div
     *ngFor="let blog of blogs; trackBy: trackById"
-    class="card mb-3"
+    class="card mb-5"
     [ngStyle]="{ border: getBorderStyle(blog.upvotes, blog.downvotes) }"
   >
     <div class="card-body">

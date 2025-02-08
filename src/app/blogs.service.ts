@@ -32,7 +32,16 @@ export class BlogsService {
     return this.http.put<Blog>(`${this.apiUrl}/downvote/${id}`, {});
   }
 
-  getPartialLoadBlogs(page: number, limit: number) {
-    return this.http.get(`${this.apiUrl}?page=${page}&limit=${limit}`);
+  getPartialLoadBlogs(
+    currentPage: number,
+    limit: number,
+    search: string
+  ): Observable<any> {
+    const params = {
+      currentPage: currentPage,
+      limit: limit,
+      search: search,
+    };
+    return this.http.get(this.apiUrl, { params });
   }
 }
